@@ -19,3 +19,5 @@ Face files are strawberryshortcakecookiex.png.
 
 To use this, capture your in-game screenshot first.
 Then rename your screenshot file into 'cookie_run_screenshot.jpg' or reset game_image_file's path.
+
+Images whose name start with KakaoTalk are sample ingame screenshot image.
