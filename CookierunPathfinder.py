@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-# 젤리 이미지 파일 로드 함수
+# 젤리 이미지 파일 로드
 def load_jelly_images(jelly_files):
     jelly_images = {}
     for color, file in jelly_files.items():
@@ -10,7 +10,7 @@ def load_jelly_images(jelly_files):
             jelly_images[color] = image
     return jelly_images
 
-# 이미지 위치 감지 함수
+# 이미지 위치 감지
 def detect_image_position(game_image, target_images, threshold=0.633):
     # 이미지를 그레이스케일로 변환
     game_image_gray = cv2.cvtColor(game_image, cv2.COLOR_BGR2GRAY)
@@ -27,7 +27,7 @@ def detect_image_position(game_image, target_images, threshold=0.633):
 
     return positions
 
-# 젤리 위치 감지 함수
+# 젤리 위치 감지
 def detect_jelly_positions(game_image, jelly_images):
     jelly_positions = {}
     for color, jelly_image in jelly_images.items():
@@ -35,7 +35,7 @@ def detect_jelly_positions(game_image, jelly_images):
         jelly_positions[color] = positions
     return jelly_positions
 
-# 최적 경로 찾기 함수
+# 최적 경로 찾기
 def find_nearest_jelly(current_position, jelly_positions):
     min_distance = float('inf')
     nearest_jelly = None
@@ -51,7 +51,7 @@ def find_nearest_jelly(current_position, jelly_positions):
     
     return nearest_jelly
 
-# 최적 경로 찾기 및 시각화 함수
+# 최적 경로 찾기 및 시각화
 def find_optimal_path(game_image, jelly_positions, initial_position):
     current_position = initial_position
     path = []
@@ -77,7 +77,6 @@ def find_optimal_path(game_image, jelly_positions, initial_position):
 
 # 메인 함수
 def main():
-    # 젤리 이미지 파일 경로
     jelly_files = {
         'silvercoin': 'silvercoin.png',
         'kingbearjelly': 'kingbearjelly.webp',
@@ -86,17 +85,12 @@ def main():
         'pinkbearjelly': 'pinkbearjelly.png'
     }
 
-    # 인게임 캡쳐 이미지 파일 경로
     game_image_file = 'cookie_run_screenshot.jpg'
     
-    # 캐릭터 이미지 파일 경로들
-        # 캐릭터 이미지 파일 경로들
     character_files = ['strawberryshortcakecookie.png', 'strawberryshortcakecookie1.png', 'strawberryshortcakecookie2.png', 'strawberryshortcakecookie3.png', 'strawberryshortcakecookie4.png']
 
-    # 젤리 이미지 로드
     jelly_images = load_jelly_images(jelly_files)
 
-    # 인게임 캡쳐 이미지 로드
     game_image = cv2.imread(game_image_file)
     height, width = game_image.shape[:2]
 
@@ -127,7 +121,6 @@ def main():
     # 최적 경로 찾기 및 시각화
     optimal_image, path = find_optimal_path(game_image, jelly_positions, initial_position)
 
-    # 결과 이미지 및 경로 출력
     print("Pathfinder Result:", path)
     cv2.imshow('CR Pathfinder', optimal_image)
     cv2.waitKey(0)
